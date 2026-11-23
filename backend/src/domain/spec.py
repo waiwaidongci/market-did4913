@@ -39,7 +39,7 @@ SPEC = {
     "decision": "试点复核决定",
     "action": "提交试点复核",
     "modes": ["继续观察", "补报后重算", "提交扩围评估"],
-    "pages": ["试点总览", "门岗明细", "差分测算", "试点结果", "复核决定", "报告交付"],
+    "pages": ["试点总览", "门岗明细", "差分测算", "试点结果", "复核决定", "报告交付", "档案取档"],
     "fields": [
         {"key": "market_id", "label": "市场", "type": "string", "required": True},
         {"key": "date", "label": "观测日期", "type": "date", "required": True},
@@ -60,4 +60,27 @@ SPEC = {
     ],
     "fixture": {"window_days": 5, "pretrend_threshold": 1},
     "axes": "四格均值图以分钟显示各组前后均值。组间差值图按时间排列，纵轴为试点组减对照组的等候分钟。",
+    "procurement": {
+        "page": "档案取档",
+        "title": "缺报复盘取档",
+        "entity": "档案包",
+        "catalog_sample": "档案目录_示例.csv",
+        "catalog_fields": [
+            {"key": "package_code", "label": "档案包编号", "type": "string"},
+            {"key": "package_name", "label": "档案包名称", "type": "string"},
+            {"key": "price", "label": "价格（元）", "type": "int"},
+            {"key": "market_id", "label": "市场", "type": "string"},
+            {"key": "date", "label": "可补日期", "type": "date"},
+        ],
+        "groups": ["试点组", "对照组"],
+        "rules": [
+            "每行是一家档案包可补的一个市场日；同一编号的价格与名称须一致。",
+            "同一份复盘沿用原窗口：试点前两段、试点后一段，共三段等长。",
+            "某市场三段逐日齐全才算补齐一家；试点组与对照组都达到设定家数才算补齐一份复盘。",
+            "同一个包可被多份复盘共用，费用只计一次。",
+            "在预算内补齐份数最多；份数相同时取总价最低。",
+            "档案源数据更新后旧方案立即失效，重算后才能继续使用。",
+        ],
+        "limits": {"replays": 10, "packages": 400, "segments": 28},
+    },
 }

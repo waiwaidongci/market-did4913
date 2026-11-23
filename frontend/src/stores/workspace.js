@@ -6,10 +6,20 @@ export const workspace = {
   spec: null,
   datasets: [],
   runs: [],
+  catalogs: [],
+  plans: [],
   async init() { this.spec = await request('/spec'); },
-  async refresh() { [this.datasets, this.runs] = await Promise.all([call('/datasets'), call('/runs')]); },
+  async refresh() {
+    [this.datasets, this.runs, this.catalogs, this.plans] = await Promise.all([
+      call('/datasets'), call('/runs'), call('/catalogs'), call('/plans'),
+    ]);
+  },
   getDataset: (id, offset = 0) => call(`/datasets/${id}?offset=${offset}`),
   getRun: id => call(`/runs/${id}`),
+  getCatalog: id => call(`/catalogs/${id}`),
+  getPlan: id => call(`/plans/${id}`),
+  uploadCatalog: data => call('/catalogs', data),
+  startPlan: data => call('/plans', data),
   upload: data => call('/datasets', data),
   start: data => call('/runs', data),
   review: (id, data) => call(`/runs/${id}/review`, data),

@@ -141,3 +141,13 @@ body[data-page="results"] .main > div > .panel { margin-top:1rem; }
   .account p { display:none; }
 }
 @media(prefers-reduced-motion:reduce) { *,*::after,*::before { transition:none!important; animation:none!important; } }
+
+/* 档案取档 */
+.replay-list { display:grid; gap:1rem; }
+.replay-row { border:1px solid var(--line); padding:1rem; display:grid; gap:.7rem; background:var(--panel); }
+.replay-row legend { font-weight:700; padding:0 .4rem; color:var(--accent); }
+.replay-quota { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr)); gap:.7rem; }
+.replay-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:.4rem; }
+.replay-head h3 { margin:0; }
+.quota-summary { margin:.5rem 0; display:grid; gap:.2rem; }
+.pill[data-state="stale"] { border-color:oklch(58% .16 29); background:color-mix(in oklch,var(--accent-soft) 40%,transparent); }

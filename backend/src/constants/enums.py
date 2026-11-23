@@ -15,3 +15,10 @@ class Review(StrEnum):
     PENDING = 'pending'
     ACCEPTED = 'accepted'
     RETURNED = 'returned'
+
+class ProcurementStatus(StrEnum):
+    QUEUED = 'queued'
+    RUNNING = 'running'
+    COMPLETE = 'complete'
+    FAILED = 'failed'
+    STALE = 'stale'
